@@ -1,23 +1,17 @@
 {
-  "name": "lab5",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Baribal172/2imd-webtech3-lab5.git"
-  },
-  "author": "Vincent Van de Sompel",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Baribal172/2imd-webtech3-lab5/issues"
-  },
-  "homepage": "https://github.com/Baribal172/2imd-webtech3-lab5#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "nodemon": "^2.0.3"
-  }
+	"name": "2imd-webtech3-lab5",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"start": "./node_modules/.bin/nodemon ./bin/www"
+	},
+	"dependencies": {
+		"cookie-parser": "~1.4.4",
+		"debug": "~2.6.9",
+		"express": "~4.16.1",
+		"http-errors": "~1.6.3",
+		"morgan": "~1.9.1",
+		"nodemon": "^2.0.3",
+		"pug": "2.0.0-beta11"
+	}
 }
