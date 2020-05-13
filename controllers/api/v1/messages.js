@@ -61,7 +61,28 @@ const postMessage = function (req, res) {
 // PUT: /api/v1/messages/:id
 // (met mongoDb) Kan een JSON-object ontvangen en een specifiek bericht updaten en geeft die nieuwe bericht terug
 const updateMessage = function (req, res) {
-	res.send("message”: “UPDATING a message with id id");
+	Message.findOneAndUpdate(
+		{
+			_id: req.params.id,
+		},
+		(err, docs) => {
+			if (!err) {
+				res.json({
+					status: "success",
+					data: {
+						message: "updated message",
+						// message: docs,
+					},
+				});
+			}
+			if (err) {
+				res.json({
+					status: "error",
+					message: "Could not update this message",
+				});
+			}
+		}
+	);
 };
 
 // DELETE: /api/v1/messages/:id
@@ -93,7 +114,27 @@ const deleteMessage = function (req, res) {
 // (met mongoDb) Kan berichten teruggeven voor een bepaalde username
 // Tip: req.params.username
 const getMessagebyUsername = function (req, res) {
-	res.send("message”: “GETTING message for username username");
+	Message.find(
+		{
+			user: req.params.user,
+		},
+		(err, docs) => {
+			if (!err) {
+				res.json({
+					status: "success",
+					data: {
+						message: docs,
+					},
+				});
+			}
+			if (err) {
+				res.json({
+					status: "error",
+					message: "Could not find this message fromthis user",
+				});
+			}
+		}
+	);
 };
 module.exports.getAll = getAll;
 module.exports.getMessageById = getMessageById;
