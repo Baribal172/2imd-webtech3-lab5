@@ -3,21 +3,16 @@ const Message = require("../../../models/messages");
 // GET: /api/v1/messages
 // (met mongoDb) Geeft messages terug
 const getAll = function (req, res) {
-	Message.find(
-		{
-			user: "Vincent",
-		},
-		(err, docs) => {
-			if (!err) {
-				res.json({
-					status: "success",
-					data: {
-						message: docs,
-					},
-				});
-			}
+	Message.find({}, (err, docs) => {
+		if (!err) {
+			res.json({
+				status: "success",
+				data: {
+					message: docs,
+				},
+			});
 		}
-	);
+	});
 };
 // GET: /api/v1/messages/:id
 // (met mongoDb) Geeft message met specifiek id terug
