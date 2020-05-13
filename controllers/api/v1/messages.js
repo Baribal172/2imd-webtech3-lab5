@@ -63,10 +63,31 @@ const postMessage = function (req, res) {
 const updateMessage = function (req, res) {
 	res.send("message”: “UPDATING a message with id id");
 };
+
 // DELETE: /api/v1/messages/:id
 // (met mongoDb) Kan een message met id verwijderen en geeft een response terug {“status”: “success”, “message”: “The message was removed”}
 const deleteMessage = function (req, res) {
-	res.send("message”: “DELETING a message with id id");
+	Message.findOneAndDelete(
+		{
+			_id: req.params.id,
+		},
+		(err, docs) => {
+			if (!err) {
+				res.json({
+					status: "success",
+					data: {
+						message: "deketed message",
+					},
+				});
+			}
+			if (err) {
+				res.json({
+					status: "error",
+					message: "Could not delete this message",
+				});
+			}
+		}
+	);
 };
 // GET: /api/v1/messages?user=username
 // (met mongoDb) Kan berichten teruggeven voor een bepaalde username
