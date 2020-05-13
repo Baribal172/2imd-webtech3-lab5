@@ -1,7 +1,28 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const messageSchema = new Schema({
+	text: String,
+	user: String,
+});
+const Message = mongoose.model("Message", messageSchema);
 // GET: /api/v1/messages
 // (met mongoDb) Geeft messages terug
 const getAll = function (req, res) {
-	res.send("message: GETTING messages");
+	Message.find(
+		{
+			user: "Vincent",
+		},
+		(err, docs) => {
+			if (!err) {
+				res.json({
+					status: "success",
+					data: {
+						message: docs,
+					},
+				});
+			}
+		}
+	);
 };
 // GET: /api/v1/messages/:id
 // (met mongoDb) Geeft message met specifiek id terug
@@ -12,7 +33,26 @@ const getMessageById = function (req, res) {
 // (met mongoDb) Kan een JSON-object ontvangen en bewaren en geeft het nieuwe document terug
 // Body: { message: { “user”: “Pikachu”, “text”: “nodejs isn’t hard, or is it?” } }
 const postMessage = function (req, res) {
-	res.send("message”: “POSTING a new message for user Pikachu");
+	let message = new Message();
+	message.text = "My first message";
+	message.user = "Vincent";
+	message.save((err, docs) => {
+		if (!err) {
+			res.json({
+				status: "success",
+				data: {
+					message: docs,
+				},
+			});
+		}
+
+		if (err) {
+			res.json({
+				status: "error",
+				message: "Could not save this message",
+			});
+		}
+	});
 };
 // PUT: /api/v1/messages/:id
 // (met mongoDb) Kan een JSON-object ontvangen en een specifiek bericht updaten en geeft die nieuwe bericht terug
