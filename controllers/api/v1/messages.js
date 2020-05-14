@@ -67,7 +67,7 @@ const postMessage = function (req, res) {
 // PUT: /api/v1/messages/:id
 // (met mongoDb) Kan een JSON-object ontvangen en een specifiek bericht updaten en geeft die nieuwe bericht terug
 const updateMessage = function (req, res) {
-	Message.findOneAndUpdate(
+	Message.findByIdAndUpdate(
 		{
 			_id: req.params.id,
 		},
@@ -76,17 +76,17 @@ const updateMessage = function (req, res) {
 				res.json({
 					status: "success",
 					data: {
-						message: "updated message",
+						message: "updated message with id:",
 						// message: docs,
 					},
 				});
 			}
-			if (err) {
-				res.json({
-					status: "error",
-					message: "Could not update this message",
-				});
-			}
+			// if (err) {
+			// 	res.json({
+			// 		status: "error",
+			// 		message: "Could not update this message",
+			// 	});
+			// }
 		}
 	);
 };
