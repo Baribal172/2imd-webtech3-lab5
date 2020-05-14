@@ -9,9 +9,12 @@ const usersRouter = require("./routes/users");
 const apiMessagesRouter = require("./routes/api/v1/messages");
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/lab5", {
-	useNewUrlParsers: true,
-});
+mongoose.connect(
+	"mongodb+srv://lab5:wKKPiNlF5lNolgbd@cluster0-by4r0.mongodb.net/test?retryWrites=true&w=majority",
+	{
+		useNewUrlParsers: true,
+	}
+);
 const app = express();
 
 // view engine setup
