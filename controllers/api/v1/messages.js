@@ -89,6 +89,7 @@ const postMessage = function (req, res) {
 // 		}
 // 	);
 // };
+//Had hetzelfde probleem als in video 19 dus heb het op dezelfde manier opgelost
 const updateMessage = (req, res) => {
 	let messageId = req.params.id;
 	Message.findByIdAndUpdate(
@@ -106,7 +107,7 @@ const updateMessage = (req, res) => {
 			res.json({
 				status: "success",
 				data: {
-					Message: "updated message:",
+					Message: "updated message with id: " + messageId,
 				},
 			});
 		})
@@ -127,7 +128,7 @@ const deleteMessage = function (req, res) {
 				res.json({
 					status: "success",
 					data: {
-						message: "deketed message with id:" + req.params.id,
+						message: "deleted message with id:" + req.params.id,
 					},
 				});
 			}
