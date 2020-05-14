@@ -30,6 +30,12 @@ const getMessageById = function (req, res) {
 					},
 				});
 			}
+			if (err) {
+				res.json({
+					status: "error",
+					message: "Could not find the message with this Id",
+				});
+			}
 		}
 	);
 };
@@ -97,16 +103,16 @@ const deleteMessage = function (req, res) {
 				res.json({
 					status: "success",
 					data: {
-						message: "deketed message",
+						message: "deketed message with id:" + req.params.id,
 					},
 				});
 			}
-			if (err) {
-				res.json({
-					status: "error",
-					message: "Could not delete this message",
-				});
-			}
+			// if (err) {
+			// 	res.json({
+			// 		status: "error",
+			// 		message: "Could not delete this message",
+			// 	});
+			// }
 		}
 	);
 };
