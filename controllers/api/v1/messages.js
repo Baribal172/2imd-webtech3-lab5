@@ -66,29 +66,53 @@ const postMessage = function (req, res) {
 };
 // PUT: /api/v1/messages/:id
 // (met mongoDb) Kan een JSON-object ontvangen en een specifiek bericht updaten en geeft die nieuwe bericht terug
-const updateMessage = function (req, res) {
+// const updateMessage = function (req, res) {
+// 	Message.findByIdAndUpdate(
+// 		{
+// 			_id: req.params.id,
+// 		},
+// 		(err, docs) => {
+// 			if (!err) {
+// 				res.json({
+// 					status: "success",
+// 					data: {
+// 						message: "updated message:",
+// 					},
+// 				});
+// 			}
+// 			if (err) {
+// 				res.json({
+// 					status: "error",
+// 					message: "Could not update this message",
+// 				});
+// 			}
+// 		}
+// 	);
+// };
+const updateMessage = (req, res) => {
+	let messageId = req.params.id;
 	Message.findByIdAndUpdate(
 		{
-			_id: req.params.id,
+			_id: messageId,
 		},
-		(err, docs) => {
-			if (!err) {
-				res.json({
-					status: "success",
-					data: {
-						message: "updated message with id:",
-						// message: docs,
-					},
-				});
-			}
-			// if (err) {
-			// 	res.json({
-			// 		status: "error",
-			// 		message: "Could not update this message",
-			// 	});
-			// }
+		{
+			completed: true,
+		},
+		{
+			new: true,
 		}
-	);
+	)
+		.then((doc) => {
+			res.json({
+				status: "success",
+				data: {
+					Message: "updated message:",
+				},
+			});
+		})
+		.catch((err) => {
+			res.json(err);
+		});
 };
 
 // DELETE: /api/v1/messages/:id
